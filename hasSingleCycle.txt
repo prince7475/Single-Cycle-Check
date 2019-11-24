@@ -1,0 +1,22 @@
+Write a function that determines if an array has a single cycle
+
+Example [2,3,1,-4,-4,2] --> true
+
+function hasSingleCycle(array){
+  let jumps = 1
+  let startIdx = 0
+  let idx = startIdx
+  while(jumps <= array.length){
+      if(jumps > 1 && idx === startIdx)return false 
+    idx = getNextJumpIdx(idx,array)
+    jumps++
+  }
+  
+  return idx === startIdx
+}
+
+function getNextJumpIdx(idx,array){
+  let currJumps = array[idx]
+  let amountOfJumps = (currJumps + idx) % array.length;
+  return amountOfJumps < 0 ? amountOfJumps + array.length : amountOfJumps 
+}
